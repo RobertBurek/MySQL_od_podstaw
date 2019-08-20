@@ -7,10 +7,10 @@
     <title>Blog</title>
     <style>
         .post {
-            margin-bottom: 50px;
+            margin-bottom: 10px;
         }
         .post-content {
-            margin-top: 30px;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -23,9 +23,13 @@
         $password = 'blogadmin';
 
         $connection = new mysqli($host, $user, $password, $dbName);
-        $postList = $connection->query("SELECT post_title, post_date, post_content FROM post");
+        $postList = $connection->query("SELECT post_title, post_date, post_content FROM post ORDER BY post_date DESC");
         while($post = mysqli_fetch_array($postList)){
-            print_r($post);
+            echo '<article class="post">';
+            echo '<h3>'.$post['post_title'].'</h3>';
+            echo '<span>'.$post['post_date'].'</span>';
+            echo '<div class="post-content">'.$post['post_content'].'</div>';
+            echo '</article>';
         }
     ?>
 <h2>Dodaj nowy wpis</h2>
