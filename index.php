@@ -23,7 +23,10 @@
         $password = 'blogadmin';
 
         $connection = new mysqli($host, $user, $password, $dbName);
-        print_r($connection);
+        $postList = $connection->query("SELECT post_title, post_date, post_content FROM post");
+        while($post = mysqli_fetch_array($postList)){
+            print_r($post);
+        }
     ?>
 <h2>Dodaj nowy wpis</h2>
 <form action="" method="post">
