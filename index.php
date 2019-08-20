@@ -16,7 +16,15 @@
 </head>
 <body>
 <h2>Najnowsze wpisy</h2>
+    <?PHP
+        $host = 'localhost:3307';
+        $dbName = 'blog';
+        $user = 'blogadmin';
+        $password = 'blogadmin';
 
+        $connection = new mysqli($host, $user, $password, $dbName);
+        print_r($connection);
+    ?>
 <h2>Dodaj nowy wpis</h2>
 <form action="" method="post">
     <label for="title">Tytuł</label><br>
