@@ -37,9 +37,12 @@
             $title = $_POST['title'];
             $content = $_POST['content'];
             $categoryId = $_POST['category_id'];
-            print_r($title);
-            print_r($content);
-            print_r($categoryId);
+
+            $stm = $connection->prepare("INSERT INTO post(post_title, post_content, post_date, category_id) VALUES (?, ?, NOW(), ?)");
+            $stm->bind_param("ssi", $title, $content, $categoryId);
+            $stm->execute();
+            $stm->close();
+            header("Location: index.php");
         }
     ?>
 <h2>Dodaj nowy wpis</h2>
