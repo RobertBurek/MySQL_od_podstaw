@@ -32,8 +32,18 @@
             echo '</article>';
         }
     ?>
+    <?PHP
+        if ( isset($_POST['add-post']) ) {
+            $title = $_POST['title'];
+            $content = $_POST['content'];
+            $categoryId = $_POST['category_id'];
+            print_r($title);
+            print_r($content);
+            print_r($categoryId);
+        }
+    ?>
 <h2>Dodaj nowy wpis</h2>
-<form action="" method="post">
+<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
     <label for="title">Tytuł</label><br>
     <input type="text" id="title" name="title"><br>
     <label for="content">Treść wpisu</label><br>
