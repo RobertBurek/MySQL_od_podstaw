@@ -1,0 +1,112 @@
+c:\mysql -u root -p
+show database;
+use mysql;
+show tables;
+select * from user \G;
+create user 'blogadmin'@'localhost' identified by 'blogadmin';
+show grants for 'blogadmin'@'localhost';
+grant select,insert,update,delete,create,drop on blog to 'blogadmin'@'localhost';
+grant all  on blog.* to 'blogadmin'@'localhost';
+mysql -u blogadmin -p
+use blog;
+show tables;
+create table if not exists post(post_id INT NOT NULL Auto_increment primary key,
+    -> post_title varchar(100), post_content longtext,
+    -> post_date datetime);
+show tables;
+describe post;
+INSERT INTO post(post_title,post_content,post_date) VALUES (
+    -> 'PHP7 - nowoœci','Przyk³adowa treœæ wpisu tutaj...',
+    -> '2019-05-21 11:00:02');
+select * from post;
+INSERT INTO post(post_title,post_content,post_date) VALUES (
+    -> 'Angular 4 od podstaw','Przyk³adowa treœæ wpisu na ten temat.',
+    -> '2019-05-25 11:25:42');
+INSERT INTO post(post_title,post_content,post_date) VALUES (
+    -> 'Filtry CSS','CSS - przyk³ady wpisu na ten temat.',
+    -> '2019-06-05 15:32:14');
+select * from post;
+SELECT post_title from post limit 2;
+SELECT post_id,post_title from post;
+SELECT * From post WHERE post_id = 2;
+SELECT post_id,post_title from post where post_id>1;
+SELECT * from post ORDER BY post_title;
+SELECT * from post ORDER BY post_title DESC;
+SELECT * from post ORDER BY post_date DESC;
+SELECT * from post WHERE post_id > 1 ORDER BY post_date DESC;
+ALTER TABLE post ADD category_id INT;
+UPDATE post SET category_id=1 Where post_id=1;
+UPDATE post SET category_id=2 Where post_id>1;
+
+d:\msyqldump -u root -p 
+d:\mysqldump -u root -p blog > D:\blog.sql
+
+select * from blog.post;
+DELETE FROM post WHERE post_id=3;
+drop table post;
+musi istnieæ nowa baza, zerowa.
+d:\mysql -u root -p blog < D:\backup\blog.sql
+d:\mysql -u root -p blog < D:\mysql_od_podstaw\backup\blog.sql
+select 2+3;
+select 2+3-32*6/3;
+select 2/0;
+select * from post where post_id > 4 AND category_id = 2;
+select * from post where post_id > 4 && category_id = 2;
+select * from post where category_id = 1 OR category_id = 3;
+select * from post where category_id = 1 || category_id = 3;
+select * from post where category_id != 1;
+select * from post
+    -> where
+    -> post_id > 3
+    -> and
+    -> category_id = 2;
+
+create procedure GetAllPost()
+    -> begin
+    -> select * from post;
+    -> end //
+    -> delimiter ;
+
+select length('Robert');
+select length('Robertœæ');
+select lower('MYSQL');
+select upper('mysql');
+select CONCAT('mysql','2',' fgfgf');
+selec upper(post_title) from post;
+select abs(2);
+select abs(-62);
+SELECT ROUND(8.92);
+SELECT ROUND(1.2323);
+select rand();
+select round(rand()*10);
+select post_id, post_title from post order by rand();
+select curdate();
+select now();
+select day(now());
+select hour(now());
+select minute(now());
+select date_add('2019-05-24',interval 45 day);
+select user();
+select database();
+select version();
+
+SELECT post.post_title, category.category_title FROM `post` INNER JOIN category ON post.category_id= category.category_id;
+ALTER TABLE post ADD FOREIGN KEY (category_id) REFERENCES category(category_id);
+SELECT COUNT(category_id) FROM post;
+SELECT COUNT(category_id) FROM post GROUP by category_id;
+SELECT category.category_title, COUNT(category.category_id) FROM post INNER JOIN category ON post.category_id=category.category_id GROUP by post.category_id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
